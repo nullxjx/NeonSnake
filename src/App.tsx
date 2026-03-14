@@ -90,7 +90,7 @@ function App() {
         {/* 署名 */}
         <div className="mt-6 text-center">
           <p className="text-gray-600 text-xs tracking-wider">
-            Created By XJX with OpenCode
+            Created by XJX with OpenCode
           </p>
         </div>
       </div>

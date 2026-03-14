@@ -129,8 +129,8 @@ export function HUD() {
 
       {/* 右侧信息面板 */}
       <div className="absolute -right-44 top-0 w-40 flex flex-col gap-4">
-        {/* 纯AI模式显示算法和状态（合并） */}
-        {isAIOnlyMode && (
+        {/* 纯AI模式显示算法和状态（合并），游戏结束时隐藏避免与结算界面重复 */}
+        {isAIOnlyMode && gameState !== GameState.GAME_OVER && (
           <>
             <div className="bg-panel-bg backdrop-blur-sm rounded-xl px-4 py-4 border border-neon-purple/30 shadow-lg">
               <div className="grid grid-cols-2 gap-4">
@@ -148,22 +148,11 @@ export function HUD() {
                   </div>
                 </div>
                 {/* 状态 */}
-                <div>
+                <div className="overflow-hidden">
                   <div className="text-gray-400 text-xs uppercase tracking-wider mb-1">AI 状态</div>
-                  <div className={`text-base font-bold ${aiStatusConfig[aiStatus].color}`}>
-                    <span className="mr-1">{aiStatusConfig[aiStatus].emoji}</span>
+                  <div className={`text-sm font-bold ${aiStatusConfig[aiStatus].color}`}>
+                    <span className="mr-0.5">{aiStatusConfig[aiStatus].emoji}</span>
                     {aiStatusConfig[aiStatus].text}
-                  </div>
-                  <div className="text-xs text-gray-500 mt-0.5 truncate">
-                    {aiStatus === AIStatus.CHASING_FOOD && '安全追击食物'}
-                    {aiStatus === AIStatus.SAFE_CRUISE && '跟随尾巴保安全'}
-                    {aiStatus === AIStatus.CIRCUITOUS && '故意绕路'}
-                    {aiStatus === AIStatus.PATHFINDING && '计算路径中'}
-                    {aiStatus === AIStatus.SPACE_LIMITED && '空间不足15%'}
-                    {aiStatus === AIStatus.EMERGENCY_ESCAPE && '紧急寻路'}
-                    {aiStatus === AIStatus.APPROACHING_TARGET && '接近目标'}
-                    {aiStatus === AIStatus.LOCKED_ON && '即将吃到'}
-                    {aiStatus === AIStatus.DEAD && '游戏结束'}
                   </div>
                 </div>
               </div>
